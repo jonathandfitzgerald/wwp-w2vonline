@@ -282,7 +282,7 @@ server <- function(input, output) {
     data <- get(input$modelSelect) %>% closest_to(input$advanced_word1, input$all_count)
     if (input$advanced_word2 != "" && input$advanced_word3 == "") {
       if (input$advanced_math == "+") {
-        data <- get(input$modelSelect) %>% closest_to(get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word1,] renderText(input$advanced_math) get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word2,], input$all_count) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
+        data <- get(input$modelSelect) %>% closest_to(get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word1,] + get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word2,], input$all_count) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
       }
       if (input$advanced_math == "-") {
         data <- get(input$modelSelect) %>% closest_to(get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word1,] - get(input$modelSelect)[rownames(get(input$modelSelect))==input$advanced_word2,], input$all_count) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
