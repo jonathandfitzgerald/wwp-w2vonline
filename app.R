@@ -10,9 +10,26 @@ library(tidyverse)
 library(shinyjs)
 library(wordVectors)
 library(DT)
-#wwp_model = read.vectors("data/wwpData_df.bin")
+# wwp_model = read.vectors("data/wwpData_df.bin")
 #wwp_model_adorned <- read.vectors("data/adornedText.bin")
 #wwp_model_unadorned <- read.vectors("data/wwo-non-adorned.bin")
+fileList <- list.files("data",full.names = TRUE,pattern = "*.bin$")
+fileListNames <- list.files("data",full.names = FALSE,pattern = "*.bin$") # Create a list of files in a folder
+list_models <- list()
+counter = 1
+
+for(fn in fileList) {
+
+  print(fn)
+  list_models[[fn]] <- read.vectors(fn)
+  counter = counter + 1
+}
+
+names(list_models) <- fileListNames
+
+
+
+# pre-run clustering
 clustering = kmeans(wwp_model,centers=150,iter.max = 40)
 
 # Define UI for application that draws a histogram
@@ -40,9 +57,9 @@ ui <- fluidPage(
       
       
       }
-    
+      
       #clustering_panel .resetrow {margin-bottom: 20px;}
-
+      
       .math_text {font-size: 36px;
       font-weight: bold;
       padding-top:12px;
@@ -55,190 +72,190 @@ ui <- fluidPage(
   titlePanel("Word Vector Analysis for Women Writers Online"),
   sidebarLayout(
     sidebarPanel(width = 3,
-      selectInput("modelSelect", "Model", 
-                 choices = list("Regularized Model" = "wwp_model_adorned", "Unregularized Model" = "wwp_model_unadorned"),    
-                 selected = 1),
-      numericInput("all_count", "# of words:", 10),
-      actionButton("all_reset_input", "Reset inputs")
+                 selectInput("modelSelect", "Model", 
+                             choices = list(list_models,names(list_models)),    
+                             selected = 1),
+                 numericInput("all_count", "# of words:", 10),
+                 actionButton("all_reset_input", "Reset inputs")
     ),
     
     mainPanel(width = 9, id = "mainpanel",
-    
-    
-  navbarPage(
-    "",
-    
-    # Basic Tab
-    tabPanel(
-      "Basic",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "basic_panel",
-        column(9,
-               # Sidebar with a inputs
-               textInput("basic_word1", "Word 1"),
-               hr())
-        
-      ),
-
-      # Show a plot of the generated distribution
-      fluidRow(
-               column(
-                 9,
-                 DT::dataTableOutput("basic_table")
-               ))
-      
-    ),
-    
-    # Clustering Tab
-    
-    tabPanel(
-      "Clustering",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "clustering_panel",
-        column(9,
-               class = "resetrow",
-               actionButton("clustering_reset_input", "Reset clusters"))
-        
-      ),
-      # Show a plot of the generated distribution
-      fluidRow(
-        column(
-          9,
-          DT::dataTableOutput("clustering_table")
-        ))
-    ),
-    
-    # Addition Tab
-    tabPanel(
-      "Addition",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "addition_panel",
-        column(4,
-               # Sidebar with a inputs
-               textInput("addition_word1", "Word 1")),
-        column(
-          1,
-          class = "mathCol",
-          tags$p(class="math_text","+")
-        ),
-        column(4,
-               textInput("addition_word2", "Word 2"))
-        
-      ),
-      # Show a plot of the generated distribution
-      fluidRow(
-               column(
-                 9,
-                 DT::dataTableOutput("addition_table")
-               ))
-    ),
-    
-    # Subtraction Tab
-    
-    tabPanel(
-      "Subtraction",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "subtraction_panel",
-        column(4,
-               # Sidebar with a inputs
-               textInput("subtraction_word1", "Word 1")),
-        column(
-          1,
-          class = "mathCol",
-          tags$p(class="math_text","-")
-        ),
-        column(4,
-               textInput("subtraction_word2", "Word 2"))
-        
-      ),
-      # Show a plot of the generated distribution
-      fluidRow(
-               column(
-                 9,
-                 DT::dataTableOutput("subtraction_table")
-               ))
-    ),
-    
-    
-    # Analogies Tab
-    
-    tabPanel(
-      "Analogies",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "analogies_panel",
-        column(2,
-               # Sidebar with a inputs
-               textInput("analogies_word1", "Word 1")),
-        column(
-          1,
-          class = "mathCol",
-          tags$p(class="math_text","-")
-        ),
-        column(2,
-               textInput("analogies_word2", "Word 2")),
-        column(
-          1,
-          class = "mathCol",
-          tags$p(class="math_text","+")
-        ),
-        column(2,
-               textInput("analogies_word3", "Word 3")
-        )
-      ),
-
-      # Show a plot of the generated distribution
-      fluidRow(
-               column(
-                 9,
-                 DT::dataTableOutput("analogies_table")
-               ))
-    ),
-    
-    
-    # Advanced Tab
-    
-    tabPanel(
-      "Advanced",
-      fluidRow(
-        shinyjs::useShinyjs(),
-        id = "advanced_panel",
-        column(2,
-               # Sidebar with a inputs
-               textInput("advanced_word1", "Word 1")),
-        column(1,
-               class = "mathCol",
-               selectInput("advanced_math", "Math", 
-                           choices = list("+" = "+", "-" = "-", "*" = "*", "/" = "/"),    
-                           selected = 1)),
-        column(2,
-               textInput("advanced_word2", "Word 2")),
-        column(1,
-               class = "mathCol",
-               selectInput("advanced_math2", "Math", 
-                           choices = list("+" = "+", "-" = "-", "*" = "*", "/" = "/"),   
-                           selected = 1)),
-        column(2,
-               textInput("advanced_word3", "Word 3")
-        )
-      ),
-
-      # Show a plot of the generated distribution
-      fluidRow(
-               column(
-                 9,
-                 DT::dataTableOutput("advanced_table")
-               ))
-    )
-    
-
-    
-    
-  )))
+              
+              
+              navbarPage(
+                "",
+                
+                # Basic Tab
+                tabPanel(
+                  "Basic",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "basic_panel",
+                    column(9,
+                           # Sidebar with a inputs
+                           textInput("basic_word1", "Word 1"),
+                           hr())
+                    
+                  ),
+                  
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("basic_table")
+                    ))
+                  
+                ),
+                
+                # Clustering Tab
+                
+                tabPanel(
+                  "Clustering",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "clustering_panel",
+                    column(9,
+                           class = "resetrow",
+                           actionButton("clustering_reset_input", "Reset clusters"))
+                    
+                  ),
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("clustering_table")
+                    ))
+                ),
+                
+                # Addition Tab
+                tabPanel(
+                  "Addition",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "addition_panel",
+                    column(4,
+                           # Sidebar with a inputs
+                           textInput("addition_word1", "Word 1")),
+                    column(
+                      1,
+                      class = "mathCol",
+                      tags$p(class="math_text","+")
+                    ),
+                    column(4,
+                           textInput("addition_word2", "Word 2"))
+                    
+                  ),
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("addition_table")
+                    ))
+                ),
+                
+                # Subtraction Tab
+                
+                tabPanel(
+                  "Subtraction",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "subtraction_panel",
+                    column(4,
+                           # Sidebar with a inputs
+                           textInput("subtraction_word1", "Word 1")),
+                    column(
+                      1,
+                      class = "mathCol",
+                      tags$p(class="math_text","-")
+                    ),
+                    column(4,
+                           textInput("subtraction_word2", "Word 2"))
+                    
+                  ),
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("subtraction_table")
+                    ))
+                ),
+                
+                
+                # Analogies Tab
+                
+                tabPanel(
+                  "Analogies",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "analogies_panel",
+                    column(2,
+                           # Sidebar with a inputs
+                           textInput("analogies_word1", "Word 1")),
+                    column(
+                      1,
+                      class = "mathCol",
+                      tags$p(class="math_text","-")
+                    ),
+                    column(2,
+                           textInput("analogies_word2", "Word 2")),
+                    column(
+                      1,
+                      class = "mathCol",
+                      tags$p(class="math_text","+")
+                    ),
+                    column(2,
+                           textInput("analogies_word3", "Word 3")
+                    )
+                  ),
+                  
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("analogies_table")
+                    ))
+                ),
+                
+                
+                # Advanced Tab
+                
+                tabPanel(
+                  "Advanced",
+                  fluidRow(
+                    shinyjs::useShinyjs(),
+                    id = "advanced_panel",
+                    column(2,
+                           # Sidebar with a inputs
+                           textInput("advanced_word1", "Word 1")),
+                    column(1,
+                           class = "mathCol",
+                           selectInput("advanced_math", "Math", 
+                                       choices = list("+" = "+", "-" = "-", "*" = "*", "/" = "/"),    
+                                       selected = 1)),
+                    column(2,
+                           textInput("advanced_word2", "Word 2")),
+                    column(1,
+                           class = "mathCol",
+                           selectInput("advanced_math2", "Math", 
+                                       choices = list("+" = "+", "-" = "-", "*" = "*", "/" = "/"),   
+                                       selected = 1)),
+                    column(2,
+                           textInput("advanced_word3", "Word 3")
+                    )
+                  ),
+                  
+                  # Show a plot of the generated distribution
+                  fluidRow(
+                    column(
+                      9,
+                      DT::dataTableOutput("advanced_table")
+                    ))
+                )
+                
+                
+                
+                
+              )))
     )
 
 # Define server logic required to display table
@@ -247,7 +264,7 @@ server <- function(input, output) {
   
   
   # Basic Tab 
-
+  
   output$basic_table <- DT::renderDataTable(DT::datatable({
     validate(need(input$basic_word1 != "", "Enter a search term in Word 1."))
     data <- get(input$modelSelect) %>% closest_to(input$basic_word1, input$all_count) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
