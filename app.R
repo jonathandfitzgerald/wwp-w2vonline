@@ -12,7 +12,7 @@ library(wordVectors)
 library(DT)
 
 
-# wwp_model = read.vectors("data/wwpData_df.bin")
+wwp_model = read.vectors("data/wwpData_df.bin")
 # wwp_model_adorned <- read.vectors("data/adornedText.bin")
 # wwp_model_unadorned <- read.vectors("data/wwo-non-adorned.bin")
 fileList <- list.files("data",full.names = TRUE,pattern = "*.bin$")
