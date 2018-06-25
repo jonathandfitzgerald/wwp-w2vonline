@@ -29,7 +29,7 @@ for(fn in fileList) {
 
 
 # pre-run clustering
-# clustering = kmeans(wwp_model,centers=150,iter.max = 40)
+clustering = kmeans(wwp_model,centers=150,iter.max = 40)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
