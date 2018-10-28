@@ -1,0 +1,20 @@
+{
+  
+  "WWO Corpus": {
+    "shortName": "WWO Full Corpus",
+    "location": "data/wwo_xquery-nonreg_allTexts.bin",
+	"shortDescription" : "All texts from WWO",
+	"public" : "true",
+    "description": "This is the entire Women Writers Online corpus of women's writing from 1526 to 1850. The text has been regularized with XSLT and XQuery."
+  },
+
+  "WWO Body Content": {
+    "shortName": "WWO Body Content",
+    "location": "data/wwo_xquery-nonreg_gi-body.bin",
+	"shortDescription" : "Text content extracted from the <body> element in the WWO, excludes front and back matter",
+	"public" : "false",
+    "description": "This subset of the Women Writers Online corpus includes the body of each text, without front or back matter. The text has been regularized with XSLT and XQuery."
+  }
+
+  
+}

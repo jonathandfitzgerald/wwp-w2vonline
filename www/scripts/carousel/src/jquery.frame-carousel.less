@@ -1,0 +1,219 @@
+/*! Frame Carousel - v0.1.0 - 2015-06-08
+* http://www.eastros.com/frame-carousel/
+* Copyright (c) 2015 Umar Ashfaq; Licensed MIT */
+
+
+@btn-primary-color: #666;
+@btn-opacity-normal: 0.7;
+@btn-opacity-active: 1;
+@btn-opacity-disabled: 0.4;
+
+@btn-control-diameter: 40px;
+@btn-pagination-diameter: 12px;
+
+.fc {
+  position: relative;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  width: 300px;
+  height: 400px;
+
+  display: inline-block;
+  margin: 60px;
+  margin-bottom: 80px;
+
+  .fc-frame {
+    margin: 0 auto;
+  }
+
+  .fc-image-mask {
+    background: #fff;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .fc-film {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &:after {
+      content: ".";
+      display: block;
+      clear: both;
+      visibility: hidden;
+      line-height: 0;
+      height: 0;
+    }
+  }
+
+  .fc-image-masked {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    float: left
+  }
+
+  .fc-controls {
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .fc-btn {
+    color: @btn-primary-color;
+    width: @btn-control-diameter;
+    height: @btn-control-diameter;
+    border-radius: @btn-control-diameter / 2;
+    padding: 10px;
+    border: 1px solid @btn-primary-color;
+    position: absolute;
+    box-sizing: border-box;
+
+    line-height: 0.3;
+    font-size: 40px;
+    opacity: @btn-opacity-normal;
+
+    &:hover, &:focus, &:active, &.active {
+      text-decoration: none;
+      opacity: @btn-opacity-active;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      opacity: @btn-opacity-disabled;
+    }
+
+    &.fc-btn-left {
+      left: -60px;
+
+      &:before {
+        right: 16px;
+        top: 10px;
+        position: absolute;
+        display: block;
+        content: " ";
+        border: 9px solid;
+        width: 0;
+        height: 0;
+        /* line-height: normal; */
+        border-color: transparent @btn-primary-color transparent transparent !important;
+      }
+    }
+
+    &.fc-btn-right {
+      right: -60px;
+
+      &:before {
+        left: 16px;
+        top: 10px;
+        position: absolute;
+        display: block;
+        content: " ";
+        border: 9px solid;
+        width: 0;
+        height: 0;
+        /* line-height: normal; */
+        border-color: transparent transparent transparent @btn-primary-color !important;
+      }
+    }
+  }
+
+
+  .fc-pagination {
+    font-size: 40px;
+    width: 100%;
+    text-align: center;
+    top: 105%;
+    left: 7px;
+    position: absolute;
+
+    .fc-pagination-inner {
+      margin: 0 auto;
+      display: inline-block;
+
+      &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+      }
+
+      a {
+        color: @btn-primary-color;
+        position: relative;
+        float: left;
+        display: block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        width: 14px;
+        height: 14px;
+        opacity: @btn-opacity-normal;
+        text-decoration: none;
+
+        &:before {
+          position: absolute;
+          content: ' ';
+          display: block;
+          width: @btn-pagination-diameter;
+          height: @btn-pagination-diameter;
+          border: 1px solid @btn-primary-color;
+          border-radius: @btn-pagination-diameter / 2;
+          box-sizing: border-box;
+          top: 0;
+          left: 0;
+        }
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+          text-decoration: none;
+          opacity: @btn-opacity-active;
+
+          &:before {
+            background-color: @btn-primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .fc-animate {
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+  	-webkit-perspective: 1000;
+  }
+
+  .fc-debug:after {
+    content: attr(data-debug);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: red;
+    background: white;
+  }
+  
+  &.fc-collapsed {
+    background-image: none !important;
+    margin: 0 !important;
+    
+    .fc-pagination {
+      top: 70%;
+    }
+    
+    .fc-controls {
+      display: none;
+    }
+  }
+}
