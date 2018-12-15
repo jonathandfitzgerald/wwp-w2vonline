@@ -1,6 +1,6 @@
 {
-	
-    
+
+
         "EEBO1": {
 		"shortName": "Early English Books Online 1",
 		"location": "data/eebo1.bin",
@@ -8,7 +8,7 @@
 		"public" : "true",
 		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
     },
-    
+
         "EEBO2": {
 		"shortName": "Early English Books Online 2",
 		"location": "data/eebo2.bin",
@@ -16,7 +16,7 @@
 		"public" : "true",
 		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
     },
-    
+
         "EEBO3": {
 		"shortName": "Early English Books Online 3",
 		"location": "data/eebo3.bin",
@@ -24,7 +24,7 @@
 		"public" : "true",
 		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
     },
-    
+
         "EEBO4": {
 		"shortName": "Early English Books Online 4",
 		"location": "data/eebo4.bin",
@@ -52,7 +52,7 @@
 
   "VWWP and 19thc WWO": {
     "shortName": "VWWP and 19th-Century WWO",
-    "location": "data/vwwp_wwo_19thC_xquery_nonreg.bin",
+    "location": "data/vwwp_wwo_19thc_xquery_nonreg.bin",
 	"shortDescription" : "The Victorian Women Writers Project and 19thC Women Writers Online Combined Corpus",
 	"public" : "true",
     "description": "Currently displayed: a combined corpus that includes the full set of Victorian Women Writers Projects texts and the subset of the Women Writers Online corpus that was published in the 19th century."
@@ -114,7 +114,7 @@
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes all text marked as appearing in a paragraph (<p>). Because this model is trained on a small corpus, it should be treated as experimental."
   },
-  
+
   "EEBO": {
 		"shortName": "Early English Books Online",
 		"location": "data/eebo.bin",
