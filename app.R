@@ -557,7 +557,13 @@ shinyApp(
                          width = 12,
                          actionButton("clustering_reset_input_fullcluster", "Reset clusters"),
                          downloadButton("downloadData", "Download")
-                       )
+                       ),
+                       br(),
+                       br(),
+                       sliderInput("max_words_cluster",
+                                   "Number of Words:",
+                                   min = 1,  max = 150,  value = 10)
+                       
       ),
 
       conditionalPanel(condition="input.tabset1==4",
@@ -970,21 +976,21 @@ shinyApp(
       # list_models[[input$modelSelect[[1]]]]
       data <- list_models[[input$modelSelect[[1]]]] %>% closest_to(input$basic_word1, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
-    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10, searching = TRUE)))
+    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10, searching = FALSE)))
 
 
     output$basic_table_c1 <- DT::renderDataTable(DT::datatable({
       # list_models[[input$modelSelect[[1]]]]
       data <- list_models[[input$modelSelectc1[[1]]]] %>% closest_to(input$basic_word_c, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
-    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(pageLength = input$max_words, searching = TRUE)))
+    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(dom = 't', pageLength = input$max_words, searching = FALSE)))
 
 
     output$basic_table_c2 <- DT::renderDataTable(DT::datatable({
       # list_models[[input$modelSelect[[1]]]]
       data <- list_models[[input$modelSelectc2[[1]]]] %>% closest_to(input$basic_word_c, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
-    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(pageLength = input$max_words, searching = TRUE)))
+    }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(dom = 't', pageLength = input$max_words, searching = FALSE)))
 
 
     output$tbl <- DT::renderDataTable(DT::datatable({
@@ -1009,7 +1015,7 @@ shinyApp(
         paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"'>",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"</a>")
       }) %>% as_data_frame()
       
-    }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10, searching = TRUE)))
+    }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(dom = 'ft', lengthMenu = c(10, 20, 100, 150), pageLength = input$max_words_cluster, searching = TRUE)))
 
 
 
@@ -1020,7 +1026,7 @@ shinyApp(
           ls_download_cluster <<- c(ls_download_cluster,n)
           paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"'>",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"</a>")
         }) %>% as_data_frame()
-      }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10,searching = TRUE)))
+      }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10, searching = TRUE)))
     })
 
 
