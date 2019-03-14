@@ -1,36 +1,36 @@
 {
 
 
-        "EEBO1": {
-		"shortName": "Early English Books Online 1",
+        "TCP1": {
+		"shortName": "Text Creation Partnership 1",
 		"location": "data/eebo1.bin",
-		"shortDescription" : "EEBO Selected Corpus 1",
+		"shortDescription" : "TCP Selected Corpus 1",
 		"public" : "true",
-		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
+		"description": "Currently displayed: a subset of texts from the Text Creation Partnership that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several TCP corpora, each of which has a different selection of texts."
     },
 
-        "EEBO2": {
-		"shortName": "Early English Books Online 2",
+        "TCP2": {
+		"shortName": "Text Creation Partnership 2",
 		"location": "data/eebo2.bin",
-		"shortDescription" : "EEBO Selected Corpus 2",
+		"shortDescription" : "TCP Selected Corpus 2",
 		"public" : "true",
-		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
+		"description": "Currently displayed: a subset of texts from the Text Creation Partnership that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several TCP corpora, each of which has a different selection of texts."
     },
 
-        "EEBO3": {
-		"shortName": "Early English Books Online 3",
+        "TCP3": {
+		"shortName": "Text Creation Partnership 3",
 		"location": "data/eebo3.bin",
-		"shortDescription" : "EEBO Selected Corpus 3",
+		"shortDescription" : "TCP Selected Corpus 3",
 		"public" : "true",
-		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
+		"description": "Currently displayed: a subset of texts from the Text Creation Partnership that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several TCP corpora, each of which has a different selection of texts."
     },
 
-        "EEBO4": {
-		"shortName": "Early English Books Online 4",
+        "TCP4": {
+		"shortName": "Text Creation Partnership 4",
 		"location": "data/eebo4.bin",
-		"shortDescription" : "EEBO Selected Corpus 4",
+		"shortDescription" : "TCP Selected Corpus 4",
 		"public" : "true",
-		"description": "Currently displayed: a subset of texts from Early English Books Online that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several EEBO corpora, each of which has a different selection of texts."
+		"description": "Currently displayed: a subset of texts from the Text Creation Partnership that contains approximately the same number of words as the full Women Writers Online corpus, to allow for experimental comparisons between the two corpora. This is one of several TCP corpora, each of which has a different selection of texts."
     },
 
   "VWWP": {
