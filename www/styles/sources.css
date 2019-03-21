@@ -1,0 +1,47 @@
+.sources-collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.sources-active, .collapsible:hover {
+    background-color: #555;
+}
+
+.sources-collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.sources-active:after {
+    content: "\2212";
+}
+
+.sources-content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    font-family: 'Raleway', sans-serif;
+    text-align: justify;
+}
+
+.sources-hangindent {
+    padding-left: 0.5em;
+    text-indent: -0.5em;
+}
+
+.sources-textindent {
+  padding-left: 0.5em;
+}
