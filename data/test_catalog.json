@@ -12,9 +12,10 @@
     "shortName": "WWO Body Content",
     "location": "data/wwo_xquery-nonreg_gi-body.bin",
 	"shortDescription" : "Text content extracted from the <body> element in the WWO, excludes front and back matter",
-	"public" : "false",
+	"public" : "true",
     "description": "This subset of the Women Writers Online corpus includes the body of each text, without front or back matter. The text has been regularized with XSLT and XQuery."
   }
 
   
 }
+

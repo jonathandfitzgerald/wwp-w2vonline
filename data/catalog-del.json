@@ -1,0 +1,57 @@
+{
+  "17th century morphed": {
+    "shortName": "17th century morphed",
+    "location": "data/wwo_eme-morph_17C.txt.bin",
+    "description": ""
+  },
+  "18th century morphed": {
+    "shortName": "18th century morphed",
+    "location": "data/wwo_eme-morph_18C.txt.bin",
+    "description": ""
+  },
+  "19th century morphed": {
+    "shortName": "19th century morphed",
+    "location": "data/wwo_eme-morph_19C.txt.bin",
+    "description": ""
+  },
+  "full text morphed": {
+    "shortName": "full text morphed",
+    "location": "data/wwo_eme-morph_allTexts.txt.bin",
+    "description": ""
+  },
+  "us morphed": {
+    "shortName": "us morphed",
+    "location": "data/wwo_eme-morph_us.txt.bin",
+    "description": ""
+  },
+  "non us morphed": {
+    "shortName": "non us morphed",
+    "location": "data/wwo_eme-morph_non-us.txt.bin",
+    "description": ""
+  },
+  "17th century regularized morphed": {
+    "shortName": "17th century regularized morphed",
+    "location": "data/wwo_reg-morph_17C.txt.bin",
+    "description": ""
+  },
+  "18th century regularized morphed": {
+    "shortName": "18th century regularized morphed",
+    "location": "data/wwo_reg-morph_18C.txt.bin",
+    "description": ""
+  },
+  "19th century regularized morphed": {
+    "shortName": "19th century regularized morphed",
+    "location": "data/wwo_reg-morph_19C.txt.bin",
+    "description": ""
+  },
+  "full text regularized morphed": {
+    "shortName": "full text  regularized morphed",
+    "location": "data/wwo_reg-morph_allTexts.txt.bin",
+    "description": ""
+  },
+  "non us regularized morphed": {
+    "shortName": "non us regularized morphed",
+    "location": "data/wwo_reg-morph_non-us.txt.bin",
+    "description": ""
+  }
+}
