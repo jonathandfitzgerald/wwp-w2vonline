@@ -14,9 +14,7 @@ library(ggrepel)
 
 
 
-# json_file <- "model-descs-SC.json"
-json_file <- "data/wwoToolKit_catalog_json.json"
-# json_file <- "data/catalog.json"
+json_file <- "data/catalog.json"
 json_data <- fromJSON(file=json_file)
 
 
