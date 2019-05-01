@@ -14,8 +14,6 @@ library(ggrepel)
 
 
 
-# json_file <- "model-descs-SC.json"
-# # json_file <- "data/wwoToolKit_catalog_json.json"
 json_file <- "data/catalog.json"
 json_data <- fromJSON(file=json_file)
 
@@ -38,37 +36,37 @@ ls_download_cluster <- c()
 
 
 
-i <- 1  
+i <- 1
 for(fn in json_data) {
   if(fn$public == "true")
   {
     print(fn$shortName)
     print(fn$location)
     val <- fn$shortName
-    
+
     if(val == "WWO Full Corpus")
     {
       Selected_default <- val
       Selected_compare_1 <-val
     }
-    
+
     if(val == "WWO Body Content")
     {
       print(i)
       Selected_compare_2 <- val
     }
-    
-    
+
+
     fileList <- append(fileList, val)
     list_models[[fn$shortName]] <- read.vectors(fn$location)
     list_Desc[[fn$shortName]] <- fn$description
     list_clustering [[fn$shortName]] <- kmeans( list_models[[fn$shortName]] , centers=150,iter.max = 40)
-    
-    
+
+
     data <- as.matrix(list_models[[fn$shortName]])
     vectors[[fn$shortName]] <-stats::predict(stats::prcomp(data))[,1:2]
-    
-    
+
+
     i = i + 1
   }
 }
@@ -77,75 +75,140 @@ for(fn in json_data) {
 
 
 body <- dashboardBody(
-  
+
+  includeScript(path = "script.js"),
+
   tags$style(type="text/css",
              ".shiny-output-error { visibility: hidden; }",
              ".shiny-output-error:before { visibility: hidden; }"
   ),
-  
+
   tags$head(tags$style(HTML("
-                           
-                            #downloadData {
-                              margin-top: 6px !important;
-                              height: fit-content !important;
-                              color: #444 !important;
+
+@media only screen and (max-width: 1000px) {
+                            body {
                             }
 
+
+                            #table-main-2 {
+                            display: none !important;
+                            }
+
+                            .col-sm-6 {
+                            flex: 0 0 100% !important;
+                            max-width: 100% !important;
+                            }
+
+                            .compare_width {
+                            width: 100% !important;
+                            }
+
+                            #tabset1 > li:nth-child(2) {
+                            display: none;
+                            }
+
+                            #tabset1 > li:nth-child(5) {
+                            display: none;
+                            }
+
+
+                            #wwvt-home {
+                            margin-left: 16px !important;
+                            align-self: center !important;
+                            color: #fefefe !important;
+                            font-size: 16px !important;
+                            }
+
+
+                            .navbar-collapse.collapse {
+                            height: auto!important;
+                            padding-bottom: 0;
+                            overflow: visible!important;
+                            display: none !important;
+                            }
+
+
+                            .navbar-nav {
+                            display: none !important;
+
+                            }
+
+                            .side-open {
+                            transform: none !important;
+                            }
+
+                            .side-close {
+                            -webkit-transform: translate(-230px,0) !important;
+                            -ms-transform: translate(-230px,0) !important;
+                            -o-transform: translate(-230px,0) !important;
+                            transform: translate(-230px,0) !important;
+                            }
+
+                            }
+
+                            #downloadData {
+                            margin-top: 6px !important;
+                            height: fit-content !important;
+                            color: #444 !important;
+                            }
+
+
+
                             .dataTables_wrapper {
-                              overflow-y : auto;
+                            overflow-y : auto;
                             }
 
                             .visualization {
-                              width : 100%
+                            width : 100%
 
                             }
 
 
                             #Download_reset_button {
-                              display: flex !important;
-                              margin: 0 !important;
-                              padding: 0 !important;
+                            display: flex !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
                             }
 
                             .datatables {
-                              min-height : 20px !important;
+                            min-height : 20px !important;
                             }
-  
-                            
+
+
                             .nav-item {
-                              margin: 0px 2px;
+                            margin: 0px 2px;
                             }
 
                             .dropdown-menu {
-                              font-size:16px !important;
+                            font-size:16px !important;
                             }
                             #sidebarItemExpanded {
-                              margin-top:20px;
+                            margin-top:20px;
                             }
                             .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
-                                display: table;
-                                content: unset;
+                            display: table;
+                            content: unset;
                             }
 
                             #word_cloud > img {
-                              display: block;
-                              margin-left: auto;
-                              margin-right: auto;
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
                             }
 
                             .btn {
-                                font-size:14px !important;
+                            font-size:14px !important;
                             }
                             .form-control {
-                                font-size:14px !important;
+                            font-size:14px !important;
                             }
                             .compare_width {
-                                width: 60%
+                            width: 60%
                             }
 
                             body {
-                              font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-                              font-size: 14px !important;
+                            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+                            font-size: 14px !important;
                             }
                             .main-header .navbar {     position: unset; margin : 0; font-size: 18px !important; height:68px !important;};
                             .box{-webkit-box-shadow: none; -moz-box-shadow: none;box-shadow: none;}
@@ -153,21 +216,21 @@ body <- dashboardBody(
                             .model_header {height : 160px}
 
                             #wwvt-home {
-                              margin-left: 16px !important;
-                              align-self: center !important;
-                              color: #fefefe !important;
-                              font-size: 21.6px !important;
+                            margin-left: 16px !important;
+                            align-self: center !important;
+                            color: #fefefe !important;
+                            font-size: 21.6px !important;
                             }
 
 
 
                             #wwvt-home:hover {
-                              color: #ccc !important;
-                              text-decoration: none !important;
+                            color: #ccc !important;
+                            text-decoration: none !important;
                             }
 
                             .nav-over-flow{
-                              background-color: #343a40!important
+                            background-color: #343a40!important
                             }"))),
 
   fluidRow(
@@ -176,18 +239,17 @@ body <- dashboardBody(
       id = "tabset1", height = "250px", width = 12,
       tabPanel("Home", value=1,
                fluidRow(
-                 
+
                  box(
                    tags$h1(textOutput("model_name_basic")),
                    div(class = "model_desc", p(uiOutput("model_desc_basic"))),
-                   
-                   # div(class = "model_desc", 
+                   # div(class = "model_desc",
                    #     p(textOutput("model_desc_basic"),
                    #       "The text has been regularized",
-                   #       a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #       a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #       )
                    #     ),
-                   
+
                    width=12
                  ),
                  box(solidHeader = TRUE, textInput("basic_word1", "Query term:", width = "500px"), width=12)
@@ -197,21 +259,24 @@ body <- dashboardBody(
                  box(
                    # solidHeader = TRUE,
                    DT::dataTableOutput("basic_table"),
+                   id = "table-main-1",
                    width = 6
-                   
+
                  ),
                  box(
                    # solidHeader = TRUE,
                    DTOutput('tbl'),
+                   id = "table-main-2",
                    width = 6
-                   
-                   
+
+
                  )
                )
 
 
         ),
       tabPanel("Compare", value=2,
+               id = "compareTab-Id",
 
                fluidRow(
                  box( solidHeader = TRUE, textInput("basic_word_c", "Query term:", width = "500px"), width=12)
@@ -226,10 +291,10 @@ body <- dashboardBody(
                      class = "model_header",
                      tags$h1(textOutput("model_name_compare_1")),
                      div(class = "model_desc", p(uiOutput("model_desc_compare_1"))),
-                     
+
                      # div(class = "model_desc", p(textOutput("model_desc_compare_1"),
                      #                               "The text has been regularized",
-                     #                               a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                     #                               a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                      #                             )
                          # ),
                      width = 12
@@ -245,10 +310,10 @@ body <- dashboardBody(
                      class = "model_header",
                      tags$h1(textOutput("model_name_compare_2")),
                      div(class = "model_desc", p(uiOutput("model_desc_compare_2"))),
-                     
+
                      # div(class = "model_desc", p(textOutput("model_desc_compare_2"),
                      #                             "The text has been regularized",
-                     #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                     #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                      #                             )
                      #     ),
                      width = 12
@@ -266,10 +331,10 @@ body <- dashboardBody(
                  box(
                    tags$h1(textOutput("model_name_cluster")),
                    div(class = "model_desc", p(uiOutput("model_desc_cluster"))),
-                   
+
                    # div(class = "model_desc", p(textOutput("model_desc_cluster"),
                    #                             "The text has been regularized",
-                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #                             )
                    #     ),
                    width=12
@@ -283,20 +348,20 @@ body <- dashboardBody(
                fluidRow(
                  box(
                    tags$h1(textOutput("model_name_operation")),
-                   
+
                    div(class = "model_desc", p(uiOutput("model_desc_operation"))),
-                   
-                   
+
+
                    # div(class = "model_desc", p(textOutput("model_desc_operation"),
                    #                             "The text has been regularized",
-                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #                             )
                    #     ),
                    width=12
                  ),
                  conditionalPanel(condition="input.operator_selector=='Addition'",
                                   class = "compare_width",
-                                  
+
                                   box(
                                     box(
                                       solidHeader = TRUE,
@@ -436,21 +501,21 @@ body <- dashboardBody(
                       ),
                       box(
                         solidHeader = TRUE,
-                        div(class = "model_desc", p("The visualizations tab allows you to create a 
-                                                    word cloud for the query term you would like to 
-                                                    analyze. The word cloud will produce a collage 
-                                                    of the most similar words to your query term 
-                                                    using the WWO general corpus model. You can 
-                                                    adjust the visualization based on the amount 
-                                                    of words you would like to see appear 
-                                                    (top slider bar on the left of this page). 
-                                                    These terms are based on their percentage of 
-                                                    similarity to the query term. The similarity 
-                                                    percentage is also represented in the visualization 
-                                                    by the color of each word. See below for the color 
-                                                    key. The second slider down from the similarity 
-                                                    bar will allow you to adjust the amount of words you 
-                                                    would like in your word cloud, and the bottom-most 
+                        div(class = "model_desc", p("The visualizations tab allows you to create a
+                                                    word cloud for the query term you would like to
+                                                    analyze. The word cloud will produce a collage
+                                                    of the most similar words to your query term
+                                                    using the WWO general corpus model. You can
+                                                    adjust the visualization based on the amount
+                                                    of words you would like to see appear
+                                                    (top slider bar on the left of this page).
+                                                    These terms are based on their percentage of
+                                                    similarity to the query term. The similarity
+                                                    percentage is also represented in the visualization
+                                                    by the color of each word. See below for the color
+                                                    key. The second slider down from the similarity
+                                                    bar will allow you to adjust the amount of words you
+                                                    would like in your word cloud, and the bottom-most
                                                     slider controls the size of the plot image."),
                                                   div("Similarity Color Key"),
                                                   div("Similarity % -- Color"),
@@ -465,8 +530,8 @@ body <- dashboardBody(
                       width = 12
                     )
                  ),
-                 
-                 
+
+
                  conditionalPanel(condition="input.visualisation_selector=='scatter'",
                       class = "visualization",
                       shinyjs::useShinyjs(),
@@ -500,7 +565,7 @@ shinyApp(
         # tags$script(src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"),
         # tags$script(src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"),
         htmlTemplate("template.html", name = "header-component")
-        
+
         # tags$link(rel = "stylesheet", type = "text/css", href = "style/main.css"),
         # tags$nav(
         #   class = "navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
@@ -531,7 +596,7 @@ shinyApp(
                                    selected = Selected_default),
                        br(),
                        actionButton("clustering_reset_input", "Reset clusters")
-                       
+
       ),
 
       conditionalPanel(condition="input.tabset1==2",
@@ -563,7 +628,7 @@ shinyApp(
                        sliderInput("max_words_cluster",
                                    "Number of Words:",
                                    min = 1,  max = 150,  value = 10)
-                       
+
       ),
 
       conditionalPanel(condition="input.tabset1==4",
@@ -602,20 +667,20 @@ shinyApp(
                             selectInput("scatter_cluster", "Cluster",
                                         choices = list("cluster 1" = "V1",
                                                        "cluster 2" = "V2",
-                                                       "cluster 3" = "V3", 
-                                                       "cluster 4" = "V4", 
-                                                       "cluster 5" = "V5", 
-                                                       "cluster 6" = "V6", 
-                                                       "cluster 7" = "V7", 
-                                                       "cluster 8" = "V8", 
-                                                       "cluster 9" = "V9", 
+                                                       "cluster 3" = "V3",
+                                                       "cluster 4" = "V4",
+                                                       "cluster 5" = "V5",
+                                                       "cluster 6" = "V6",
+                                                       "cluster 7" = "V7",
+                                                       "cluster 8" = "V8",
+                                                       "cluster 9" = "V9",
                                                        "cluster 10" = "V10" ),
                                         selected = 1),
                             sliderInput("scatter_number",
                                         "Number of Words:",
                                         min = 5,  max = 30,  value = 10),
                             actionButton("clustering_reset_input_visualisation", "Reset clusters")
-                            
+
                        ),
                        conditionalPanel(condition="input.visualisation_selector=='scatter_closest'",
                                         selectInput("scatter_plot_closest_choice", "Cluster",
@@ -638,31 +703,31 @@ shinyApp(
     output$tabset1Selected <- renderText({
       input$tabset1
     })
-    
-    
+
+
 
     set.seed(122)
     histdata <- rnorm(500)
-    
+
 
     output$plot1 <- renderPlot({
       plot(mtcars$wt, mtcars$mpg)
     })
-    
-    outputOptions(output, "plot1", suspendWhenHidden = FALSE)
-    
 
-    
+    outputOptions(output, "plot1", suspendWhenHidden = FALSE)
+
+
+
     output$downloadData <- downloadHandler(
       filename = function() {
         paste(input$modelSelect_clusters[[1]], ".csv", sep = "")
       },
-      
+
       content = function(file) {
         data <- sapply(ls_download_cluster,function(n) {
           paste0(names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]))
         }) %>% as_data_frame()
-        
+
         write.csv(data, file, row.names = FALSE)
       })
 
@@ -670,78 +735,78 @@ shinyApp(
     observeEvent(input$modelSelect, {
       output$model_name_basic <- renderText(input$modelSelect[[1]])
       # output$model_desc_basic <- renderText({list_Desc[[input$modelSelect[[1]]]]})
-      
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_basic <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect[[1]]]], "The text has been regularized."), url)
       })
-      
+
     })
 
 
     observeEvent(input$modelSelectc1, {
       output$model_name_compare_1 <- renderText(input$modelSelectc1[[1]])
       # output$model_desc_compare_1 <- renderText({list_Desc[[input$modelSelectc1[[1]]]]})
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_compare_1 <- renderUI({
         tagList(paste(list_Desc[[input$modelSelectc1[[1]]]], "The text has been regularized."), url)
       })
-      
-      
+
+
     })
 
     observeEvent(input$modelSelectc2, {
       output$model_name_compare_2 <- renderText(input$modelSelectc2[[1]])
       # output$model_desc_compare_2 <- renderText({list_Desc[[input$modelSelectc2[[1]]]]})
-      
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_compare_2 <- renderUI({
         tagList(paste(list_Desc[[input$modelSelectc2[[1]]]], "The text has been regularized."), url)
       })
-      
-      
+
+
     })
 
 
     observeEvent(input$modelSelect_clusters, {
       output$model_name_cluster <- renderText(input$modelSelect_clusters[[1]])
       # output$model_desc_cluster <- renderText({list_Desc[[input$modelSelect_clusters[[1]]]]})
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_cluster <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_clusters[[1]]]], "The text has been regularized."), url)
       })
-      
-      
-      
+
+
+
     })
 
 
     observeEvent(input$modelSelect_analogies_tabs, {
       output$model_name_operation <- renderText(input$modelSelect_analogies_tabs[[1]])
       # output$model_desc_operation <- renderText({list_Desc[[input$modelSelect_analogies_tabs[[1]]]]})
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_operation <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_analogies_tabs[[1]]]], "The text has been regularized."), url)
       })
-      
-      
+
+
     })
 
 
     observeEvent(input$modelSelect_Visualisation_tabs, {
       output$model_name_visualisation <- renderText(input$modelSelect_Visualisation_tabs[[1]])
       # output$model_desc_visualisation <- renderText({paste(list_Desc[[input$modelSelect_Visualisation_tabs[[1]]]], "The text has been regularized")})
-      
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_visualisation <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_Visualisation_tabs[[1]]]], "The text has been regularized."), url)
       })
-      
+
     })
 
 
@@ -758,39 +823,39 @@ shinyApp(
                   colors = brewer.pal(8,"Dark2"), scale=c(input$scale,0.5))
 
     })
-    
-    
+
+
     # rv <- reactiveValues()
     # rv$setupComplete <- FALSE
-    
-    
-    
+
+
+
     dataset <- reactive({
-      
+
       times <- input$clustering_reset_input_visualisation
 
-      
+
       df2 <- sapply(sample(1:150,10),function(n) {
         paste0(names(list_clustering[[input$modelSelect_Visualisation_tabs[[1]]]]$cluster[list_clustering[[input$modelSelect_Visualisation_tabs[[1]]]]$cluster==n][1:150]))
       }) %>% as_data_frame()
-      
+
       df2
       # rv$setupComplete <- TRUE
-      
+
     })
-    
+
     datascatter <- reactive({
-      
+
       df2 <- dataset()
-      
+
       # print(df2)
-      
+
       x <- c()
       y <- c()
       names <- c()
       cluster <- c()
-      
-      
+
+
       vector <- vectors[[input$modelSelect_Visualisation_tabs[[1]]]]
       for (column in colnames(df2))
       {
@@ -801,21 +866,21 @@ shinyApp(
           cluster <- append(cluster,column)
         }
       }
-      
-      
-      
-      
+
+
+
+
       df_new <- data.frame(x = x, y = y, names = names, cluster = as.factor(cluster) ,stringsAsFactors = FALSE)
       df_new
-      
+
     })
-    
+
     # output$setupComplete <- reactive({
     #   return(rv$setupComplete)
     # })
-    
+
     # outputOptions(output, 'setupComplete', suspendWhenHidden=FALSE)
-    
+
 
     output$scatter_plot <- renderPlot({
       ggplot(datascatter(), aes(x=x, y=y, colour=cluster), height = 600,width = 800) +
@@ -823,24 +888,24 @@ shinyApp(
         geom_text_repel(aes(label=ifelse(cluster == input$scatter_cluster ,as.character(names),'')), hjust=0.5,vjust=-0.5)
 
     })
-    
-    
+
+
     outputOptions(output, "scatter_plot", suspendWhenHidden = FALSE)
-    
-    
+
+
     dataset_closet <- reactive({
-      
-      data <- as.matrix(list_models[['WWO Full Corpus']]) 
+
+      data <- as.matrix(list_models[['WWO Full Corpus']])
       vectors <-stats::predict(stats::prcomp(data))[,1:2]
-      
+
       x <- c()
       y <- c()
       names <- c()
       cluster <-c()
-  
+
       closeword <- list_models[['WWO Full Corpus']] %>% closest_to(input$scatter_plot_term, 150)
-      
-      
+
+
       i = 0
       for(word in closeword[[1]])
       {
@@ -858,20 +923,20 @@ shinyApp(
         print(i)
       }
       df_new <- data.frame(x = x, y = y, names = names, cluster = as.factor(cluster) ,stringsAsFactors = FALSE)
-      df_new  
-      
+      df_new
+
     })
-    
+
     output$scatter_plot_closest <- renderPlot({
-      ggplot(dataset_closet(), aes(x=x, y=y, colour=cluster)) + 
-        geom_point() + 
+      ggplot(dataset_closet(), aes(x=x, y=y, colour=cluster)) +
+        geom_point() +
         geom_text_repel(aes(label=ifelse(cluster == input$scatter_plot_closest_choice ,as.character(names),'')), hjust=0.5,vjust=-0.5)
     })
-    
+
     outputOptions(output, "scatter_plot_closest", suspendWhenHidden = FALSE)
-    
-    
-    
+
+
+
 
     output$addition_table <- DT::renderDataTable(DT::datatable({
       validate(need(input$addition_word1 != "" && input$addition_word2 != "", "Enter query term into word 1 and word 2."))
@@ -1014,7 +1079,7 @@ shinyApp(
         ls_download_cluster <<- c(ls_download_cluster,n)
         paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"'>",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"</a>")
       }) %>% as_data_frame()
-      
+
     }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(dom = 'ft', lengthMenu = c(10, 20, 100, 150), pageLength = input$max_words_cluster, searching = TRUE)))
 
 
