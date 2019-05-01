@@ -14,9 +14,7 @@ library(ggrepel)
 
 
 
-# json_file <- "model-descs-SC.json"
-json_file <- "data/wwoToolKit_catalog_json.json"
-# json_file <- "data/catalog.json"
+json_file <- "data/catalog.json"
 json_data <- fromJSON(file=json_file)
 
 
@@ -248,7 +246,7 @@ body <- dashboardBody(
                    # div(class = "model_desc",
                    #     p(textOutput("model_desc_basic"),
                    #       "The text has been regularized",
-                   #       a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #       a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #       )
                    #     ),
 
@@ -296,7 +294,7 @@ body <- dashboardBody(
 
                      # div(class = "model_desc", p(textOutput("model_desc_compare_1"),
                      #                               "The text has been regularized",
-                     #                               a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                     #                               a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                      #                             )
                          # ),
                      width = 12
@@ -315,7 +313,7 @@ body <- dashboardBody(
 
                      # div(class = "model_desc", p(textOutput("model_desc_compare_2"),
                      #                             "The text has been regularized",
-                     #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                     #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                      #                             )
                      #     ),
                      width = 12
@@ -336,7 +334,7 @@ body <- dashboardBody(
 
                    # div(class = "model_desc", p(textOutput("model_desc_cluster"),
                    #                             "The text has been regularized",
-                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #                             )
                    #     ),
                    width=12
@@ -356,7 +354,7 @@ body <- dashboardBody(
 
                    # div(class = "model_desc", p(textOutput("model_desc_operation"),
                    #                             "The text has been regularized",
-                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/index.html", sep=""), target="_blank")
+                   #                             a("[read more]", href=paste("https://wwp.northeastern.edu/lab/wwvt/methodology/index.html", sep=""), target="_blank")
                    #                             )
                    #     ),
                    width=12
@@ -739,7 +737,7 @@ shinyApp(
       # output$model_desc_basic <- renderText({list_Desc[[input$modelSelect[[1]]]]})
 
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_basic <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect[[1]]]], "The text has been regularized."), url)
       })
@@ -751,7 +749,7 @@ shinyApp(
       output$model_name_compare_1 <- renderText(input$modelSelectc1[[1]])
       # output$model_desc_compare_1 <- renderText({list_Desc[[input$modelSelectc1[[1]]]]})
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_compare_1 <- renderUI({
         tagList(paste(list_Desc[[input$modelSelectc1[[1]]]], "The text has been regularized."), url)
       })
@@ -764,7 +762,7 @@ shinyApp(
       # output$model_desc_compare_2 <- renderText({list_Desc[[input$modelSelectc2[[1]]]]})
 
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_compare_2 <- renderUI({
         tagList(paste(list_Desc[[input$modelSelectc2[[1]]]], "The text has been regularized."), url)
       })
@@ -777,7 +775,7 @@ shinyApp(
       output$model_name_cluster <- renderText(input$modelSelect_clusters[[1]])
       # output$model_desc_cluster <- renderText({list_Desc[[input$modelSelect_clusters[[1]]]]})
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_cluster <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_clusters[[1]]]], "The text has been regularized."), url)
       })
@@ -791,7 +789,7 @@ shinyApp(
       output$model_name_operation <- renderText(input$modelSelect_analogies_tabs[[1]])
       # output$model_desc_operation <- renderText({list_Desc[[input$modelSelect_analogies_tabs[[1]]]]})
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_operation <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_analogies_tabs[[1]]]], "The text has been regularized."), url)
       })
@@ -804,7 +802,7 @@ shinyApp(
       output$model_name_visualisation <- renderText(input$modelSelect_Visualisation_tabs[[1]])
       # output$model_desc_visualisation <- renderText({paste(list_Desc[[input$modelSelect_Visualisation_tabs[[1]]]], "The text has been regularized")})
 
-      url <- a("[read more]", href="https://wwp.northeastern.edu/wwo/lab/wwvt/methodology/")
+      url <- a("[read more]", href="https://wwp.northeastern.edu/lab/wwvt/methodology/")
       output$model_desc_visualisation <- renderUI({
         tagList(paste(list_Desc[[input$modelSelect_Visualisation_tabs[[1]]]], "The text has been regularized."), url)
       })
