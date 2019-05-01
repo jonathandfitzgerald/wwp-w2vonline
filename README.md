@@ -66,7 +66,7 @@ With the required libraries present, you can simply open `app.R`, and select the
 
 ## Customizing the application
 
-When run, the Women Writers Vector Tool will read in models from the “data” folder, and make them available for querying. Models are only published, however, if (1) they have a corresponding entry in the catalog [“data/catalog.json”](https://github.com/NEU-DSG/wwp-w2vonline/blob/master/data/catalog.json), and (2) that entry is marked “public”.
+When run, the Word Vector Interface will read in models from the “data” folder, and make them available for querying. Models are only published, however, if (1) they have a corresponding entry in the catalog [“data/catalog.json”](https://github.com/NEU-DSG/wwp-w2vonline/blob/master/data/catalog.json), and (2) that entry is marked “public”.
 
 To add your own pre-generated model(s), place them in the “data” directory. Then edit “data/catalog.json”. Here's a sample entry:
 
@@ -80,4 +80,4 @@ To add your own pre-generated model(s), place them in the “data” directory. 
 
 Each model in the catalog has a descriptive “short name”, which is used to populate the dropdown menu of queryable models. The “location” field gives a relative filepath to the model’s BIN file. The two description fields can be left as empty strings, since they aren’t yet in use. Finally, the “public” field is marked “true” (if the model should be published in the browser), or “false” (if the model should not be published).
 
-To add your own entries to the catalog, follow the template above, making sure to separate entries with commas. You may also want to change which of the existing models are published to the Tool interface.
+To add your own entries to the catalog, follow the template above, making sure to separate entries with commas. You may also want to change which of the existing models are published to the WVI interface.
