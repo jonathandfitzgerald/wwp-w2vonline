@@ -239,7 +239,9 @@ body <- dashboardBody(
                             }
 
 
-
+                            .dataTables_filter {
+                                display: none !important;
+                            }
 
                             .nav-over-flow{
                             background-color: #343a40!important
@@ -346,6 +348,10 @@ To get started, type a term you're interested in exploring in the \"Query term\"
                  box(
                    tags$h1(textOutput("model_name_cluster")),
                    div(class = "model_desc", p(uiOutput("model_desc_cluster"))),
+                   br(),
+                   actionButton("clustering_reset_input_fullcluster1", "Reset clusters"),
+
+
 
                    # div(class = "model_desc", p(textOutput("model_desc_cluster"),
                    #                             "The text has been regularized",
@@ -661,7 +667,7 @@ shinyApp(
                                    choices = fileList,
                                    selected = Selected_default),
 
-                       selectInput("visualisation_selector", "Select visualisation",
+                       selectInput("visualisation_selector","Select visualisation",
                                    choices =  list("Word Cloud" = "wc", "2d Scatter plot" = "scatter", "closest scatter plot" = "scatter_closest"),
                                    selected = 1),
 
@@ -1106,7 +1112,18 @@ shinyApp(
           ls_download_cluster <<- c(ls_download_cluster,n)
           paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"'>",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"</a>")
         }) %>% as_data_frame()
-      }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(lengthMenu = c(10, 20, 100, 150), pageLength = 10, searching = TRUE)))
+      }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(dom = 'ft', lengthMenu = c(10, 20, 100, 150), pageLength = input$max_words_cluster, searching = TRUE)))
+    })
+
+
+    observeEvent(input$clustering_reset_input_fullcluster1, {
+      ls_download_cluster <<- c()
+      output$clusters_full <- DT::renderDataTable(DT::datatable({
+        data <- sapply(sample(1:150,10),function(n) {
+          ls_download_cluster <<- c(ls_download_cluster,n)
+          paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"'>",names(list_clustering[[input$modelSelect_clusters[[1]]]]$cluster[list_clustering[[input$modelSelect_clusters[[1]]]]$cluster==n][1:150]),"</a>")
+        }) %>% as_data_frame()
+      }, escape = FALSE, colnames=c(paste0("cluster_",1:10)), options = list(dom = 'ft', lengthMenu = c(10, 20, 100, 150), pageLength = input$max_words_cluster, searching = TRUE)))
     })
 
 
