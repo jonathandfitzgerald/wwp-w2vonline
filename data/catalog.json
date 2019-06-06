@@ -43,7 +43,7 @@
 
     "VWWP and WWO": {
     "shortName": "VWWP and WWO",
-    "location": "data/vwwp_wwo_xquery_nonreg.bin",
+    "location": "data/wwo-vwwp.bin",
 	"shortDescription" : "The Victorian Women Writers Project and Women Writers Online Combined Corpus",
 	"public" : "true",
     "description": "Currently displayed: a combined corpus that includes all texts from both the Victorian Women Writers Project and Women Writers Online."
@@ -52,7 +52,7 @@
 
   "VWWP and 19thc WWO": {
     "shortName": "VWWP and 19th-Century WWO",
-    "location": "data/vwwp_wwo_19thc_xquery_nonreg.bin",
+    "location": "data/wwo-19-vwwp.bin",
 	"shortDescription" : "The Victorian Women Writers Project and 19thC Women Writers Online Combined Corpus",
 	"public" : "true",
     "description": "Currently displayed: a combined corpus that includes the full set of Victorian Women Writers Projects texts and the subset of the Women Writers Online corpus that was published in the 19th century."
@@ -61,7 +61,7 @@
 
   "WWO 17th century": {
     "shortName": "WWO 16th and 17th Centuries",
-    "location": "data/wwo_xquery-nonreg_17C.bin",
+    "location": "data/wwo-16-17.bin",
 	"shortDescription" : "WWO texts from the 17th century",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes texts that were published in the 16th and 17th centuries. Because this model is trained on a small corpus, it should be treated as experimental."
@@ -69,7 +69,7 @@
 
   "WWO 18th century": {
     "shortName": "WWO 18th Century",
-    "location": "data/wwo_xquery-nonreg_18C.bin",
+    "location": "data/wwo-18.bin",
 	"shortDescription" : "WWO texts from the 18th century",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes texts that were published in the 18th century. Because this model is trained on a small corpus, it should be treated as experimental."
@@ -77,7 +77,7 @@
 
   "WWO 19th Century": {
     "shortName": "WWO 19th Century",
-    "location": "data/wwo_xquery-nonreg_19C.bin",
+    "location": "data/wwo-19.bin",
 	"shortDescription" : "WWO texts from the 19th century",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes texts that were published in the 19th century. Because this model is trained on a small corpus, it should be treated as experimental."
@@ -85,7 +85,7 @@
 
   "WWO Corpus": {
     "shortName": "WWO Full Corpus",
-    "location": "data/wwo_xquery-nonreg_allTexts.bin",
+    "location": "data/wwo.bin",
 	"shortDescription" : "All texts from WWO",
 	"public" : "true",
     "description": "Currently displayed: the entire Women Writers Online corpus of women's writing from 1526 to 1850."
@@ -93,7 +93,7 @@
 
   "WWO Body Content": {
     "shortName": "WWO Body Content",
-    "location": "data/wwo_xquery-nonreg_gi-body.bin",
+    "location": "data/wwo-body.bin",
 	"shortDescription" : "Text content extracted from the <body> element in the WWO, excludes front and back matter",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes the body of each text, without front or back matter."
@@ -101,7 +101,7 @@
 
   "WWO Verse": {
     "shortName": "WWO Verse",
-    "location": "data/wwo_xquery-nonreg_gi-lg.bin",
+    "location": "data/wwo-lg.bin",
 	"shortDescription" : "Poetry and verse subset of the WWO",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes all text marked as appearing in a verse line group (<lg>). Because this model is trained on a small corpus, it should be treated as experimental."
@@ -109,7 +109,7 @@
 
   "WWO Prose": {
     "shortName": "WWO Prose",
-    "location": "data/wwo_xquery-nonreg_gi-p.bin",
+    "location": "data/wwo-p.bin",
 	"shortDescription" : "Prose only subset of the WWO",
 	"public" : "true",
     "description": "Currently displayed: a subset of the Women Writers Online corpus that includes all text marked as appearing in a paragraph (<p>). Because this model is trained on a small corpus, it should be treated as experimental."
