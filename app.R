@@ -855,7 +855,7 @@ shinyApp(
 
     output$word_cloud <- renderPlot({
         validate(need(input$word_cloud_word != "", "Please enter a valid Query term:"))
-        data <-  list_models[[input$modelSelect_Visualisation_tabs[[1]]]] %>% closest_to(input$word_cloud_word, 150)
+        data <-  list_models[[input$modelSelect_Visualisation_tabs[[1]]]] %>% closest_to(tolower(input$word_cloud_word), 150)
         colnames(data) <- c("words", "sims")
         data <- mutate(data, sims = as.integer(sims * 100))
 
@@ -946,7 +946,7 @@ shinyApp(
       names <- c()
       cluster <-c()
 
-      closeword <- list_models[['WWO Full Corpus']] %>% closest_to(input$scatter_plot_term, 150)
+      closeword <- list_models[['WWO Full Corpus']] %>% closest_to(tolower(input$scatter_plot_term), 150)
 
 
       i = 0
@@ -963,7 +963,6 @@ shinyApp(
         if (i > 100  ) cluster <- append(cluster, "top 150")
         i <- i + 1
         names <- append(names,word)
-        print(i)
       }
       df_new <- data.frame(x = x, y = y, names = names, cluster = as.factor(cluster) ,stringsAsFactors = FALSE)
       df_new
@@ -973,7 +972,7 @@ shinyApp(
     output$scatter_plot_closest <- renderPlot({
       ggplot(dataset_closet(), aes(x=x, y=y, colour=cluster)) +
         geom_point() +
-        geom_text_repel(aes(label=ifelse(cluster == input$scatter_plot_closest_choice ,as.character(names),'')), hjust=0.5,vjust=-0.5)
+        geom_text_repel(aes(label=ifelse(cluster == tolower(input$scatter_plot_closest_choice) ,as.character(names),'')), hjust=0.5,vjust=-0.5)
     })
 
     outputOptions(output, "scatter_plot_closest", suspendWhenHidden = FALSE)
@@ -1006,7 +1005,7 @@ shinyApp(
 
     output$advanced_table <- DT::renderDataTable(DT::datatable({
       validate(need(input$advanced_word1 != "", "Enter query term into Word 1."))
-      data <- list_models[[input$modelSelect_analogies_tabs[[1]]]] %>% closest_to(input$advanced_word1, 150)
+      data <- list_models[[input$modelSelect_analogies_tabs[[1]]]] %>% closest_to(tolower(input$advanced_word1), 150)
       if (input$advanced_word2 != "" && input$advanced_word3 == "") {
         if (input$advanced_math == "+") {
           data <- list_models[[input$modelSelect_analogies_tabs[[1]]]] %>% closest_to(list_models[[input$modelSelect_analogies_tabs[[1]]]][rownames(list_models[[input$modelSelect_analogies_tabs[[1]]]])==tolower(input$advanced_word1)] + list_models[[input$modelSelect_analogies_tabs[[1]]]][rownames(list_models[[input$modelSelect_analogies_tabs[[1]]]])==tolower(input$advanced_word2)], 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
@@ -1082,21 +1081,21 @@ shinyApp(
 
     output$basic_table <- DT::renderDataTable(DT::datatable({
       # list_models[[input$modelSelect[[1]]]]
-      data <- list_models[[input$modelSelect[[1]]]] %>% closest_to(input$basic_word1, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
+      data <- list_models[[input$modelSelect[[1]]]] %>% closest_to(tolower(input$basic_word1), 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
     }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(dom = 't', pageLength = input$max_words_home, searching = FALSE)))
 
 
     output$basic_table_c1 <- DT::renderDataTable(DT::datatable({
       # list_models[[input$modelSelect[[1]]]]
-      data <- list_models[[input$modelSelectc1[[1]]]] %>% closest_to(input$basic_word_c, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
+      data <- list_models[[input$modelSelectc1[[1]]]] %>% closest_to(tolower(input$basic_word_c), 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
     }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(dom = 't', pageLength = input$max_words, searching = FALSE)))
 
 
     output$basic_table_c2 <- DT::renderDataTable(DT::datatable({
       # list_models[[input$modelSelect[[1]]]]
-      data <- list_models[[input$modelSelectc2[[1]]]] %>% closest_to(input$basic_word_c, 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
+      data <- list_models[[input$modelSelectc2[[1]]]] %>% closest_to(tolower(input$basic_word_c), 150) %>% mutate("Link" <- paste0("<a target='_blank' href='http://wwo.wwp.northeastern.edu/WWO/search?keyword=", .$word,"'>",.$word,"</a>")) %>% .[c(3,2)]
 
     }, escape = FALSE, colnames=c("Word", "Similarity to word(s)"), options = list(dom = 't', pageLength = input$max_words, searching = FALSE)))
 
