@@ -14,13 +14,7 @@ library(ggrepel)
 
 
 
-<<<<<<< HEAD
-# json_file <- "model-descs-SC.json"
-json_file <- "data/wwoToolKit_catalog_json.json"
-# json_file <- "data/test_catalog.json"
-=======
 json_file <- "data/catalog.json"
->>>>>>> 032c97e06e6fad818fbe4c98c34a597296d74b94
 json_data <- fromJSON(file=json_file)
 
 
