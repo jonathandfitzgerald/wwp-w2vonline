@@ -222,11 +222,13 @@ body <- dashboardBody(
                             font-size: 21.6px !important;
                             }
 
-
-
                             #wwvt-home:hover {
                             color: #ccc !important;
                             text-decoration: none !important;
+                            }
+
+                            .box {
+                            overflow: auto;
                             }
 
                             .nav-over-flow{
